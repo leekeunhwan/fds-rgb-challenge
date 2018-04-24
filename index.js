@@ -12,7 +12,7 @@ const boxes = document.querySelectorAll(".box"); // boxes에 만든 사각형 �
 let correctAnswer; // 변수를 함수 안에서도 밖에서도 사용할 수 있도록 const 대신에 let을 사용
 let score = 0; //  점수 초기값 설정
 
-document.querySelector(".score").textContent = score; // 점수 표시판
+document.querySelector(".score").textContent = `SCORE : ${score}`; // 점수 표시판
 
 function newStage() {
   // 새로운 판을 실행시키기 위해서 함수로 정의해놓기
@@ -37,18 +37,28 @@ boxes.forEach((el, index) => {
       score++; // 정답이라면 1점씩 추가
     } else {
       //  아니면
+      document.querySelector(".modal.false").classList.add("show");
+      document.querySelector(".finalScore").textContent = `SCORE : ${score}`; // 게임종료로 인한 최종 점수 확인
       score = 0; // 오답이라면 정답 0점으로 다시 초기화
     }
-    document.querySelector(".score").textContent = score; // 맞추던 틀리던 alert하고 나서 점수를 반영하도록 함
+    document.querySelector(".score").textContent = `SCORE : ${score}`; // 맞추던 틀리던 alert하고 나서 점수를 반영하도록 함
   });
 });
 
 document.querySelector(".modal.right .close").addEventListener("click", () => {
-  newStage(); // 틀리든지 맞던지 새로운 판 시작!
+  newStage(); // 새로운 게임 시작
   boxes.forEach(el => {
-    el.classList.remove("large");
+    el.classList.remove("large"); // 띄었던 모달 제거
   });
-  document.querySelector(".modal.right").classList.remove("show");
+  document.querySelector(".modal.right").classList.remove("show"); // 띄었던 정답 문구 제거
+});
+
+document.querySelector(".modal.false .close").addEventListener("click", () => {
+  newStage(); // 새로운 게임 시작
+  boxes.forEach(el => {
+    el.classList.remove("large"); //  띄었던 모달 제거
+  });
+  document.querySelector(".modal.false").classList.remove("show"); // 띄었던 오답 문구 제거
 });
 
 newStage(); // 초기의 게임 실행을 위해서 함수 호출!
