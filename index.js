@@ -30,22 +30,24 @@ boxes.forEach((el, index) => {
   //  forEach구문으로 boxes 순회
   el.addEventListener("click", () => {
     //  el(즉, box)를 클릭할때
+    el.classList.add("large");
     if (correctAnswer === index) {
       //  정답이 맞으면(correctAnswer와 index가 일치하면)
-      alert("맞았습니다!"); // 정답입니다.
       document.querySelector(".modal.right").classList.add("show");
       score++; // 정답이라면 1점씩 추가
     } else {
       //  아니면
-      alert("틀렸습니다!"); // 오답입니다.
       score = 0; // 오답이라면 정답 0점으로 다시 초기화
     }
     document.querySelector(".score").textContent = score; // 맞추던 틀리던 alert하고 나서 점수를 반영하도록 함
-    newStage(); // 틀리든지 맞던지 새로운 판 시작!
   });
 });
 
 document.querySelector(".modal.right .close").addEventListener("click", () => {
+  newStage(); // 틀리든지 맞던지 새로운 판 시작!
+  boxes.forEach(el => {
+    el.classList.remove("large");
+  });
   document.querySelector(".modal.right").classList.remove("show");
 });
 
