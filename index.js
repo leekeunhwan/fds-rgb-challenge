@@ -46,19 +46,19 @@ boxes.forEach((el, index) => {
 });
 
 document.querySelector(".modal.right .close").addEventListener("click", () => {
-  newStage(); // 새로운 게임 시작
+  document.querySelector(".modal.right").classList.remove("show"); // 띄었던 정답 문구 제거
   boxes.forEach(el => {
     el.classList.remove("large"); // 띄었던 모달 제거
   });
-  document.querySelector(".modal.right").classList.remove("show"); // 띄었던 정답 문구 제거
+  newStage(); // 새로운 게임 시작
 });
 
 document.querySelector(".modal.false .close").addEventListener("click", () => {
-  newStage(); // 새로운 게임 시작
+  document.querySelector(".modal.false").classList.remove("show"); // 띄었던 오답 문구 제거
   boxes.forEach(el => {
     el.classList.remove("large"); //  띄었던 모달 제거
   });
-  document.querySelector(".modal.false").classList.remove("show"); // 띄었던 오답 문구 제거
+  newStage(); // 새로운 게임 시작
 });
 
 newStage(); // 초기의 게임 실행을 위해서 함수 호출!
